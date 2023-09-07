@@ -1,7 +1,7 @@
 # CryptRaider
-##About this project
+## About this project
 Simple first person puzzle game done in Unreal Engine.
-##Knowledge attained:
+## Knowledge attained:
 - World building inside the editor.
 - Creation of custom U components.
 - Enchanced Input System in Unreal.
