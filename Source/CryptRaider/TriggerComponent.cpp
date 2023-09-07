@@ -11,8 +11,6 @@ UTriggerComponent::UTriggerComponent()
 void UTriggerComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Log, TEXT("OnGenerateOverlapEventsChanged OnGenerateOverlapEventsChanged OnGenerateOverlapEventsChanged"));
-
 }
 
 
@@ -24,7 +22,7 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	AActor* actor = GetAcceptableActor();
 	if(actor != nullptr)
 	{
-		mover->EnableMover(true);
+		mover->UnlockMover(true);
 		UPrimitiveComponent* primitiveComponent = Cast<UPrimitiveComponent>(actor->GetRootComponent());
 		if (primitiveComponent != nullptr) 
 		{
@@ -34,7 +32,8 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	}
 	else
 	{
-		mover->EnableMover(false);
+		if(mover)
+			mover->UnlockMover(false);
 	}
 }
 

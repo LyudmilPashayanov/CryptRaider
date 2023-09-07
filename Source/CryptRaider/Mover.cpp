@@ -25,21 +25,26 @@ void UMover::BeginPlay()
 	float doorHeight = box.GetSize().Z;
 	endPos = FVector{ originalPos.X, originalPos.Y, originalPos.Z - doorHeight };
 	FString endPosString = endPos.ToCompactString();
-	duration = FVector::Distance(originalPos, endPos) / 4;
+	interpolationSpeed = FVector::Distance(originalPos, endPos) / duration;
 }
 
 // Called every frame
 void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (startMovement) {
-		FVector interpPos = FMath::VInterpConstantTo(GetOwner()->GetActorLocation(), endPos, DeltaTime, duration);
+	if (shouldUnlock) {
+		FVector interpPos = FMath::VInterpConstantTo(GetOwner()->GetActorLocation(), endPos, DeltaTime, interpolationSpeed);
+		GetOwner()->SetActorLocation(interpPos);
+	}
+	else
+	{
+		FVector interpPos = FMath::VInterpConstantTo(GetOwner()->GetActorLocation(), originalPos, DeltaTime, interpolationSpeed);
 		GetOwner()->SetActorLocation(interpPos);
 	}
 }
 
-void UMover::EnableMover(bool enable)
+void UMover::UnlockMover(bool enable)
 {
-	startMovement = enable;
+	shouldUnlock = enable;
 }
 

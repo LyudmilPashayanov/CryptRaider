@@ -24,13 +24,14 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void EnableMover(bool enable);
+	void UnlockMover(bool enable);
 
 private:
 	UPROPERTY(EditAnywhere)
 	float duration;
+	float interpolationSpeed;
 	UPROPERTY(EditAnywhere)
-	bool startMovement=false;
+	bool shouldUnlock=false;
 	FVector originalPos;
 	FVector endPos;
 };
