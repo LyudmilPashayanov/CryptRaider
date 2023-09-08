@@ -28,23 +28,26 @@ void UMover::BeginPlay()
 	interpolationSpeed = FVector::Distance(originalPos, endPos) / duration;
 }
 
-// Called every frame
-void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (shouldUnlock) {
-		FVector interpPos = FMath::VInterpConstantTo(GetOwner()->GetActorLocation(), endPos, DeltaTime, interpolationSpeed);
-		GetOwner()->SetActorLocation(interpPos);
-	}
-	else
-	{
-		FVector interpPos = FMath::VInterpConstantTo(GetOwner()->GetActorLocation(), originalPos, DeltaTime, interpolationSpeed);
-		GetOwner()->SetActorLocation(interpPos);
-	}
-}
-
 void UMover::UnlockMover(bool enable)
 {
 	shouldUnlock = enable;
 }
+
+// Called every frame
+void UMover::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	FVector goToPos;
+	if (shouldUnlock) 
+	{
+		goToPos = endPos;
+	}
+	else
+	{
+		goToPos = originalPos;
+	}
+	FVector interpPos = FMath::VInterpConstantTo(GetOwner()->GetActorLocation(), goToPos, DeltaTime, interpolationSpeed);
+	GetOwner()->SetActorLocation(interpPos);
+}
+
 

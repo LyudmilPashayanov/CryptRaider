@@ -20,20 +20,26 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	AActor* actor = GetAcceptableActor();
-	if(actor != nullptr)
+	if (actor != nullptr)
 	{
-		mover->UnlockMover(true);
-		UPrimitiveComponent* primitiveComponent = Cast<UPrimitiveComponent>(actor->GetRootComponent());
-		if (primitiveComponent != nullptr) 
+		USceneComponent* sceneComponentOfActor = actor->GetRootComponent();
+		UPrimitiveComponent* primitiveComponent = Cast<UPrimitiveComponent>(sceneComponentOfActor);
+		if (primitiveComponent != nullptr)
 		{
 			primitiveComponent->AttachToComponent(GetAttachmentRoot(), FAttachmentTransformRules(EAttachmentRule::KeepWorld, false));
 			primitiveComponent->SetSimulatePhysics(false);
 		}
+		if (mover)
+		{
+			mover->UnlockMover(true);
+		}
 	}
 	else
 	{
-		if(mover)
+		if (mover) 
+		{
 			mover->UnlockMover(false);
+		}
 	}
 }
 

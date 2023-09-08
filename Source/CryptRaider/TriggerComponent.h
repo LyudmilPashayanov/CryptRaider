@@ -37,5 +37,6 @@ private:
 
 	AActor* GetAcceptableActor() const;
 
+	UPROPERTY(EditAnywhere)
 	UMover* mover;
 };
