@@ -12,4 +12,5 @@ Simple first person puzzle game created in Unreal Engine.
 ## Game story:
 Explore the acnient temmple and find the lost statue relic. It is said the statue you need to find is on a pedestal inside a crypt. Place other statues on the highlighted spots, to unlock hidden doors.
 ## Game Video Walkthrough
-[![Crypt Rider Walkthrough](http://img.youtube.com/vi/FkvSIvlC1vo/0.jpg)]([https://youtu.be/FkvSIvlC1vo](https://youtu.be/FkvSIvlC1vo "Crypt Rider Walkthrough")
+[![Crypt Rider Walkthrough](https://img.youtube.com/vi/FkvSIvlC1vo/0.jpg)](https://www.youtube.com/watch?v=FkvSIvlC1vo)
+
